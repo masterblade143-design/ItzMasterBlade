@@ -316,6 +316,12 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
 .fitcheck h3{font-family:var(--f-display);font-weight:700;font-size:1.1rem;letter-spacing:.06em}
 .skin h4{font-family:var(--f-cond);font-weight:700;font-size:1.1rem;letter-spacing:.06em}
 #toast{font-family:var(--f-tech);font-weight:500}
+
+/* ===================== GAME LOGOS ===================== */
+.game strong{display:flex;align-items:center;gap:10px;font-size:1.05rem;letter-spacing:.02em}
+.game .gl{width:26px;height:26px;flex:none;padding:5px;border-radius:12px;box-sizing:content-box;background:color-mix(in srgb,var(--text) 6%,transparent);border:1px solid var(--line);color:var(--text);transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s}
+.game:hover .gl{transform:scale(1.1) rotate(-5deg);border-color:var(--bd)}
+@media (prefers-reduced-motion:reduce){.game .gl{transition:none}.game:hover .gl{transform:none}}
 </style>
 </head>
 <body>
@@ -404,10 +410,10 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
   <section class="card games">
     <h2>// games</h2>
     <div class="gamegrid">
-      <div class="game"><strong>⛏ Minecraft</strong><span>Builds, redstone, survival</span><div class="bar"><i style="--w:92%"></i></div></div>
-      <div class="game"><strong>🧱 Roblox</strong><span>Obbies, tycoons, hangouts</span><div class="bar"><i style="--w:80%"></i></div></div>
-      <div class="game"><strong>🏎 Asphalt Legends</strong><span>Drifts, nitro, events</span><div class="bar"><i style="--w:75%"></i></div></div>
-      <div class="game"><strong>🛡 War Thunder</strong><span>Tanks, planes, realistic battles</span><div class="bar"><i style="--w:70%"></i></div></div>
+      <div class="game"><strong><svg class="gl" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><polygon points="14,2 26,8.5 14,15 2,8.5" fill="#6cc24a"/><polygon points="2,8.5 14,15 14,26.5 2,20" fill="#8b5a34"/><polygon points="26,8.5 14,15 14,26.5 26,20" fill="#6a4226"/><polygon points="2,8.5 14,15 14,18.4 2,12" fill="#4d9a38"/><polygon points="26,8.5 14,15 14,18.4 26,12" fill="#3b7d2b"/><polygon points="14,2 26,8.5 14,15 2,8.5" fill="none" stroke="rgba(255,255,255,.25)" stroke-width=".8"/></svg>Minecraft</strong><span>Builds, redstone, survival</span><div class="bar"><i style="--w:92%"></i></div></div>
+      <div class="game"><strong><svg class="gl" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><g transform="rotate(14 14 14)"><path fill="currentColor" fill-rule="evenodd" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M5.5 5.5h17v17h-17z M11 11v6h6v-6z"/></g></svg>Roblox</strong><span>Obbies, tycoons, hangouts</span><div class="bar"><i style="--w:80%"></i></div></div>
+      <div class="game"><strong><svg class="gl" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><defs><linearGradient id="gA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb02e"/><stop offset="1" stop-color="#ff3b1f"/></linearGradient></defs><polygon points="14,2.5 26.5,26 20.6,26 14,13.4 7.4,26 1.5,26" fill="url(#gA)"/><polygon points="8.6,20.2 19.4,20.2 20.7,23 7.3,23" fill="url(#gA)"/><polygon points="3,26 25,26 25,27.2 3,27.2" fill="url(#gA)" opacity=".55"/></svg>Asphalt Legends</strong><span>Drifts, nitro, events</span><div class="bar"><i style="--w:75%"></i></div></div>
+      <div class="game"><strong><svg class="gl" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path fill="#e6a23c" d="M14 1.8c.9 0 1.5 1.6 1.7 4.2l.4 4.6 9.9 5.7v3.2l-9.8-2.6.3 5.1 2.9 2.4v2.3L14 24.9l-5.4 1.8v-2.3l2.9-2.4.3-5.1-9.8 2.6v-3.2l9.9-5.7.4-4.6c.2-2.6.8-4.2 1.7-4.2z"/><circle cx="14" cy="9.5" r="1.1" fill="#1a1a1a" opacity=".55"/></svg>War Thunder</strong><span>Tanks, planes, realistic battles</span><div class="bar"><i style="--w:70%"></i></div></div>
     </div>
   </section>
 
