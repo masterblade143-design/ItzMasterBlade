@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ItzMasterBlade</title>
-<script>try{var t=localStorage.getItem("mb-theme");if(t==="midnight"||t==="onyx"||t==="starlight"||t==="halloween"||t==="eclipse"||t==="frost"||t==="forest")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>try{var t=localStorage.getItem("mb-theme");if(t==="midnight"||t==="onyx"||t==="starlight"||t==="halloween"||t==="eclipse"||t==="frost"||t==="forest")document.documentElement.setAttribute("data-theme",t);var q=Date.now()+19800000,m=Math.floor(q/60000)%1440;if((m>=1200||m<300)&&localStorage.getItem("mb-moon")===new Date(q-(m<300?864e5:0)).toISOString().slice(0,10))document.documentElement.setAttribute("data-theme","moonlight")}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=Exo+2:wght@500;600;700&amp;family=Fraunces:ital,wght@1,500;1,600&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Orbitron:wght@500;700;900&amp;family=Outfit:wght@300;400;500;600;700&amp;family=Oxanium:wght@300;400;600&amp;family=Rajdhani:wght@600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
@@ -317,6 +317,64 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
 .skin h4{font-family:var(--f-cond);font-weight:700;font-size:1.1rem;letter-spacing:.06em}
 #toast{font-family:var(--f-tech);font-weight:500}
 
+/* ===================== GAME LOGOS ===================== */
+.game strong{display:flex;align-items:center;gap:10px;font-size:1.05rem;letter-spacing:.02em}
+.game .gl{width:26px;height:26px;flex:none;padding:5px;border-radius:12px;box-sizing:content-box;background:color-mix(in srgb,var(--text) 6%,transparent);border:1px solid var(--line);color:var(--text);transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s}
+.game:hover .gl{transform:scale(1.1) rotate(-5deg);border-color:var(--bd)}
+@media (prefers-reduced-motion:reduce){.game .gl{transition:none}.game:hover .gl{transform:none}}
+
+/* ===================== ANONYMOUS INBOX ===================== */
+.contact{grid-column:1/-1}
+.card.contact.reveal.in:hover{transform:none}
+.ct-intro{margin:0 0 14px;color:var(--mute)}
+.ct-topics{border:0;margin:0 0 12px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.ct-topics legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.ct-topics label{cursor:pointer}
+.ct-topics input{position:absolute;opacity:0;pointer-events:none}
+.ct-topics span{display:inline-block;padding:7px 14px;border-radius:999px;font:500 .85rem var(--f-head);border:1px solid var(--line);background:var(--chipbg);transition:transform .25s var(--ease),border-color .25s,background .25s,box-shadow .25s}
+.ct-topics label:hover span{transform:translateY(-2px)}
+.ct-topics input:checked+span{border-color:var(--bd);background:var(--tile);box-shadow:0 0 0 3px var(--halo)}
+.ct-topics input:focus-visible+span{outline:2px solid var(--violet);outline-offset:2px}
+#ctMsg{display:block;width:100%;resize:vertical;min-height:120px;max-height:360px;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:var(--tile);color:var(--text);font:400 1rem/1.55 var(--font);transition:border-color .25s,box-shadow .25s}
+#ctMsg::placeholder{color:var(--mute);opacity:.8}
+#ctMsg:focus{outline:none;border-color:var(--bd);box-shadow:0 0 0 3px var(--halo)}
+.ct-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;flex-wrap:wrap}
+.ct-count{font:.78rem var(--mono);color:var(--mute)}
+.ct-send{cursor:pointer;border:0;border-radius:999px;padding:11px 24px;color:#fff;font:700 .95rem var(--f-cond);letter-spacing:.06em;text-transform:uppercase;background:linear-gradient(135deg,var(--indigo),var(--violet));box-shadow:0 10px 24px -12px var(--glow);transition:transform .25s var(--ease),box-shadow .25s,opacity .25s}
+.ct-send:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 14px 28px -12px var(--glow)}
+.ct-send:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+.ct-send:disabled{opacity:.6;cursor:progress}
+.ct-status{min-height:1.4em;margin-top:10px;font-size:.9rem}
+.ct-status.ok{color:#4ade80}
+.ct-status.bad{color:#ff8a8a}
+.ct-note{margin:6px 0 0;font-size:.75rem;color:var(--mute);opacity:.85}
+.ct-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.ct-hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+@media (prefers-reduced-motion:reduce){.ct-topics span,.ct-send,#ctMsg{transition:none}.ct-topics label:hover span,.ct-send:hover:not(:disabled){transform:none}}
+
+/* ===================== MOON TOGGLE (8 PM - 5 AM IST) ===================== */
+.moonbtn{--mn1:#fff;--mn2:#cdbfff;--mo1:.62;--mo2:.16;--mne:rgba(255,255,255,.55);
+  position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));z-index:8;
+  width:56px;height:56px;padding:0;border:0;background:none;cursor:pointer;border-radius:50%;-webkit-tap-highlight-color:transparent;
+  opacity:0;transform:translateY(-8px) scale(.7);filter:drop-shadow(0 0 10px rgba(200,190,255,.35));
+  transition:opacity .7s ease,transform .7s var(--ease),filter .3s}
+.moonbtn[hidden]{display:none}
+.moonbtn.show{opacity:.8;transform:none;animation:moonfloat 7s ease-in-out infinite .7s}
+.moonbtn:hover,.moonbtn:focus-visible{opacity:1;filter:drop-shadow(0 0 16px rgba(210,200,255,.8))}
+.moonbtn:focus-visible{outline:2px solid var(--violet);outline-offset:4px}
+.moonbtn.show:hover,.moonbtn.show:focus-visible{animation-play-state:paused}
+.moonbtn svg{width:100%;height:100%;display:block;overflow:visible}
+.mn-cr circle{fill:rgba(27,8,56,.2);stroke:rgba(255,255,255,.3);stroke-width:.6}
+.mn-s{animation:mntw 3.2s ease-in-out infinite}.mn-s+.mn-s{animation-delay:-1.4s}
+html[data-theme="moonlight"] .moonbtn.show{opacity:1;filter:drop-shadow(0 0 18px rgba(214,200,255,.9));--mo1:.85;--mo2:.35}
+html[data-theme="starlight"] .moonbtn{--mn1:#5b4bb8;--mn2:#8d7de6;--mo1:.62;--mo2:.3;--mne:rgba(70,50,160,.55);filter:drop-shadow(0 0 8px rgba(110,90,210,.3))}
+html[data-theme="starlight"] .mn-cr circle{stroke:rgba(70,50,160,.3)}
+#sparkle .moon{display:none}
+@keyframes moonfloat{50%{transform:translateY(4px) rotate(-3deg)}}
+@keyframes mntw{50%{opacity:.25}}
+@media (max-width:640px){html.moon-on main{padding-top:72px}}
+@media (prefers-reduced-motion:reduce){.moonbtn,.moonbtn.show{transition:none;animation:none}.mn-s{animation:none}}
+
 /* chrome star accents */
 .starbox{position:relative;flex:0 0 auto;width:150px;aspect-ratio:1/1.12;display:grid;place-items:center;pointer-events:none}
 .starbox img{position:relative;z-index:1;width:76%;height:auto;filter:drop-shadow(0 0 12px var(--glow));animation:starfloat 7s ease-in-out infinite}
@@ -366,6 +424,27 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
 </div>
 <div id="sparkle" aria-hidden="true"><div class="moon"></div><div class="shoot"></div></div>
 <div id="halo" aria-hidden="true"></div>
+<button type="button" class="moonbtn" id="moonBtn" hidden aria-pressed="false" aria-label="Moonlight Sparkle theme, available 8 PM to 5 AM IST" title="Moonlight Sparkle · 8 PM – 5 AM IST">
+  <svg viewBox="0 0 56 56" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="mnG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--mn1);stop-opacity:var(--mo1)"/><stop offset="1" style="stop-color:var(--mn2);stop-opacity:var(--mo2)"/></linearGradient>
+      <filter id="mnCarve" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+        <feComponentTransfer in="SourceAlpha" result="inv"><feFuncA type="table" tableValues="1 0"/></feComponentTransfer>
+        <feGaussianBlur in="inv" stdDeviation="1.4" result="blur"/>
+        <feOffset in="blur" dx="1.8" dy="2" result="off"/>
+        <feFlood flood-color="#1b0838" flood-opacity=".8" result="col"/>
+        <feComposite in="col" in2="off" operator="in" result="sh"/>
+        <feComposite in="sh" in2="SourceAlpha" operator="in" result="inner"/>
+        <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="inner"/></feMerge>
+      </filter>
+      <path id="mnS" d="M0-3 .8-.8 3 0 .8.8 0 3-.8.8-3 0-.8-.8z"/>
+    </defs>
+    <path d="M23.92 9.10A21 21 0 1 0 46.51 34.51A17 17 0 0 1 23.92 9.10Z" fill="url(#mnG)" filter="url(#mnCarve)"/>
+    <path d="M23.92 9.10A21 21 0 1 0 46.51 34.51A17 17 0 0 1 23.92 9.10Z" fill="none" stroke="var(--mne)" stroke-width=".9" stroke-linejoin="round"/>
+    <g class="mn-cr"><circle cx="13.5" cy="33" r="2.6"/><circle cx="19.5" cy="41" r="1.8"/><circle cx="11.5" cy="24.5" r="1.5"/></g>
+    <use class="mn-s" href="#mnS" x="45" y="13" fill="var(--mn2)"/><use class="mn-s" href="#mnS" fill="var(--mn2)" transform="translate(50.5 24) scale(.7)"/>
+  </svg>
+</button>
 <main>
   <section class="card hero">
     <div class="tilt-wrap">
@@ -433,10 +512,10 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
   <section class="card games">
     <h2>// games</h2>
     <div class="gamegrid">
-      <div class="game"><strong>⛏ Minecraft</strong><span>Builds, redstone, survival</span><div class="bar"><i style="--w:92%"></i></div></div>
-      <div class="game"><strong>🧱 Roblox</strong><span>Obbies, tycoons, hangouts</span><div class="bar"><i style="--w:80%"></i></div></div>
-      <div class="game"><strong>🏎 Asphalt Legends</strong><span>Drifts, nitro, events</span><div class="bar"><i style="--w:75%"></i></div></div>
-      <div class="game"><strong>🛡 War Thunder</strong><span>Tanks, planes, realistic battles</span><div class="bar"><i style="--w:70%"></i></div></div>
+      <div class="game"><strong><svg class="gl" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><polygon points="14,2 26,8.5 14,15 2,8.5" fill="#6cc24a"/><polygon points="2,8.5 14,15 14,26.5 2,20" fill="#8b5a34"/><polygon points="26,8.5 14,15 14,26.5 26,20" fill="#6a4226"/><polygon points="2,8.5 14,15 14,18.4 2,12" fill="#4d9a38"/><polygon points="26,8.5 14,15 14,18.4 26,12" fill="#3b7d2b"/><polygon points="14,2 26,8.5 14,15 2,8.5" fill="none" stroke="rgba(255,255,255,.25)" stroke-width=".8"/></svg>Minecraft</strong><span>Builds, redstone, survival</span><div class="bar"><i style="--w:92%"></i></div></div>
+      <div class="game"><strong><svg class="gl" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><g transform="rotate(14 14 14)"><path fill="currentColor" fill-rule="evenodd" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M5.5 5.5h17v17h-17z M11 11v6h6v-6z"/></g></svg>Roblox</strong><span>Obbies, tycoons, hangouts</span><div class="bar"><i style="--w:80%"></i></div></div>
+      <div class="game"><strong><svg class="gl" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><defs><linearGradient id="gA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb02e"/><stop offset="1" stop-color="#ff3b1f"/></linearGradient></defs><polygon points="14,2.5 26.5,26 20.6,26 14,13.4 7.4,26 1.5,26" fill="url(#gA)"/><polygon points="8.6,20.2 19.4,20.2 20.7,23 7.3,23" fill="url(#gA)"/><polygon points="3,26 25,26 25,27.2 3,27.2" fill="url(#gA)" opacity=".55"/></svg>Asphalt Legends</strong><span>Drifts, nitro, events</span><div class="bar"><i style="--w:75%"></i></div></div>
+      <div class="game"><strong><svg class="gl" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path fill="#e6a23c" d="M14 1.8c.9 0 1.5 1.6 1.7 4.2l.4 4.6 9.9 5.7v3.2l-9.8-2.6.3 5.1 2.9 2.4v2.3L14 24.9l-5.4 1.8v-2.3l2.9-2.4.3-5.1-9.8 2.6v-3.2l9.9-5.7.4-4.6c.2-2.6.8-4.2 1.7-4.2z"/><circle cx="14" cy="9.5" r="1.1" fill="#1a1a1a" opacity=".55"/></svg>War Thunder</strong><span>Tanks, planes, realistic battles</span><div class="bar"><i style="--w:70%"></i></div></div>
     </div>
   </section>
 
@@ -501,12 +580,35 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
     </div>
   </section>
 
+  <section class="card contact" id="contact" aria-label="Anonymous message form">
+    <h2>// anonymous inbox</h2>
+    <p class="ct-intro">Feedback, ideas, questions, or just a hello. No name, no email, no account. Only I can read it.</p>
+    <form id="ctForm" novalidate autocomplete="off">
+      <fieldset class="ct-topics"><legend>Topic</legend>
+        <label><input type="radio" name="ctTopic" value="Feedback" checked><span>Feedback</span></label>
+        <label><input type="radio" name="ctTopic" value="Question"><span>Question</span></label>
+        <label><input type="radio" name="ctTopic" value="Idea"><span>Idea</span></label>
+        <label><input type="radio" name="ctTopic" value="Just saying hi"><span>Just saying hi</span></label>
+      </fieldset>
+      <label class="ct-sr" for="ctMsg">Your message</label>
+      <textarea id="ctMsg" maxlength="1000" rows="5" placeholder="Write anything you like..." required></textarea>
+      <input class="ct-hp" type="text" id="ctHp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="ct-row">
+        <span class="ct-count" id="ctCount" aria-live="off">0 / 1000</span>
+        <button type="submit" class="ct-send" id="ctSend">Send anonymously</button>
+      </div>
+      <div class="ct-status" id="ctStatus" role="status" aria-live="polite"></div>
+      <p class="ct-note">Your IP and device details are not saved with your message. A scrambled spam-check code is kept for up to an hour, then deleted.</p>
+    </form>
+  </section>
+
   <div class="gdeco gwrap gl" data-near=".games" style="--w:128px;--d:-1s" aria-hidden="true"><img src="deco-cat.png" alt=""></div>
   <img class="gdeco px gl" data-near=".projects" style="--w:116px;--d:-3s;--r:6deg" src="deco-orange.png" alt="" aria-hidden="true">
   <img class="gdeco gr" data-near=".spotify" style="--w:96px;--d:-2s;--r:-6deg" src="deco-note.png" alt="" aria-hidden="true">
 
   <footer>
-    <img class="foot-star" src="star-icon.png" alt="" aria-hidden="true">© ItzMasterBlade · built in the dark · <span id="ver">v1.2</span></footer>
+    <img class="foot-star" src="star-icon.png" alt="" aria-hidden="true">
+    © ItzMasterBlade · built in the dark · <span id="ver">v1.2</span></footer>
 </main>
 <div id="toast" role="status"></div>
 
@@ -586,9 +688,11 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
     if(t==="midnight")root.removeAttribute("data-theme");else root.setAttribute("data-theme",t);
     [].slice.call(tseg.querySelectorAll("button")).forEach(function(b){b.setAttribute("aria-checked",b.getAttribute("data-theme-btn")===t)});
     thumb(tseg);
+    var mb=document.getElementById("moonBtn");if(mb)mb.setAttribute("aria-pressed",t==="moonlight");
   }
   function swap(t,save){
     if(t===cur)return;cur=t;
+    if(t!=="moonlight"){try{localStorage.removeItem("mb-moon")}catch(e){}}
     if(save){try{localStorage.setItem("mb-theme",t)}catch(e){}}
     if(document.startViewTransition&&!calm){document.startViewTransition(function(){paint(t)})}
     else{root.classList.add("theming");paint(t);setTimeout(function(){root.classList.remove("theming")},700)}
@@ -686,6 +790,7 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
   // 3) type words
   var buf="";
   addEventListener("keydown",function(e){
+    var tg=e.target;if(tg&&(tg.tagName==="TEXTAREA"||tg.tagName==="INPUT"||tg.isContentEditable))return;
     ki=(e.keyCode===kon[ki])?ki+1:(e.keyCode===kon[0]?1:0);
     if(ki===kon.length){ki=0;hue=!hue;document.documentElement.style.filter=hue?"hue-rotate(140deg) saturate(1.2)":"";say(hue?"✨ Nova Shift activated":"Back to Midnight Nova")}
     if(e.key.length===1){
@@ -711,14 +816,44 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
       sk.appendChild(d);
     }
   }
+  // ---- MOONLIGHT SPARKLE: only 8 PM to 5 AM IST. A crescent moon appears; click it to switch the theme on/off.
+  var moon=document.getElementById("moonBtn"),moonT;
+  function istNow(){var q=Date.now()+19800000;return{q:q,m:Math.floor(q/60000)%1440}}   // IST = UTC+5:30, no DST
+  function inNight(){var m=istNow().m;return m>=1200||m<300}
+  function nightId(){var n=istNow();return new Date(n.q-(n.m<300?864e5:0)).toISOString().slice(0,10)}
+  function saveNight(){try{localStorage.setItem("mb-moon",nightId())}catch(e){}}
+  try{var st=localStorage.getItem("mb-theme");if(st&&st!=="moonlight"&&names[st])prevTheme=st}catch(e){}
+  if(cur==="moonlight")buildSparkle();
+  function moonOn(x,y){
+    if(cur==="moonlight")return;
+    prevTheme=cur;buildSparkle();swap("moonlight",false);saveNight();
+    sparks(x,y,["#c9b8ff","#7B337E","#6667AB","#ffffff"]);
+    say("\uD83C\uDF19 Moonlight Sparkle on, until 5 AM IST \u2728");
+  }
+  function moonOff(){if(cur==="moonlight")swap(prevTheme,false)}
+  function toggleMoon(x,y){if(cur==="moonlight")moonOff();else moonOn(x,y)}
+  function syncMoon(){
+    if(inNight()){
+      if(moon.hidden){moon.hidden=false;root.classList.add("moon-on");void moon.offsetWidth;moon.classList.add("show")}
+    }else{
+      if(cur==="moonlight"){swap(prevTheme,false);say("\uD83C\uDF05 Moonlight faded with the night")}
+      if(!moon.hidden){moon.classList.remove("show");root.classList.remove("moon-on");setTimeout(function(){if(!inNight())moon.hidden=true},calm?0:700)}
+    }
+    moon.setAttribute("aria-pressed",cur==="moonlight");
+  }
+  function nextEdge(){var n=istNow(),t=(n.m>=1200||n.m<300)?300:1200,d=(t-n.m+1440)%1440||1440;return d*60000-n.q%60000+500}
+  function plan(){clearTimeout(moonT);syncMoon();moonT=setTimeout(plan,Math.min(nextEdge(),2147483000))}
+  moon.addEventListener("click",function(e){var r=moon.getBoundingClientRect();toggleMoon(e.clientX||r.left+r.width/2,e.clientY||r.top+r.height/2)});
+  document.addEventListener("visibilitychange",function(){if(!document.hidden)plan()});
+  addEventListener("pageshow",plan);
+  plan();
+  // the secret still works: tap the clock's colon 3 times, but only while the moon is out
   document.getElementById("ck-time").addEventListener("click",function(e){
     if(!e.target.classList.contains("colon"))return;
     cc++;clearTimeout(cct);cct=setTimeout(function(){cc=0},1500);
     if(cc<3)return;cc=0;
-    if(cur==="moonlight"){swap(prevTheme,false);return}
-    prevTheme=cur;buildSparkle();swap("moonlight",false);
-    sparks(e.clientX,e.clientY,["#c9b8ff","#7B337E","#6667AB","#ffffff"]);
-    say("🌙 Secret theme unlocked: Moonlight Sparkle ✨");
+    if(!inNight()){say("\uD83C\uDF19 Moonlight only shines from 8 PM to 5 AM IST");return}
+    toggleMoon(e.clientX,e.clientY);
   });
   // 5) console
   console.log("%cItzMasterBlade","font:700 20px monospace;color:#a78bfa","\nPsst… try the Konami code, or type: tank, nitro");
@@ -1439,7 +1574,7 @@ jEl.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)
     else{resetArm=0;S.items={};S.disc={};S.fire=S.books=S.secret=S.chest=S.portal=0;S.wxSeen={};doneShown=false;PT.length=0;dirty();save();if(scene!=="world"){scene="world";P.x=70;P.y=gyAt(70)}hudDirty=true;buildJournal()}}});
 
 /* ---------- terminal ---------- */
-var outEl=$("pwOut"),inEl=$("pwIn"),hist=[],hi=0,GO={top:"body",about:".about",links:".links",games:".games",interests:".interests",clock:".clock",themes:".themes",projects:".projects",playlist:".spotify",skin:".fitcheck",fitcheck:".fitcheck"};
+var outEl=$("pwOut"),inEl=$("pwIn"),hist=[],hi=0,GO={top:"body",about:".about",links:".links",games:".games",interests:".interests",clock:".clock",themes:".themes",projects:".projects",playlist:".spotify",skin:".fitcheck",fitcheck:".fitcheck",contact:".contact"};
 function out(s,c){var d=document.createElement("div");if(c)d.className=c;d.textContent=s;outEl.appendChild(d);outEl.scrollTop=outEl.scrollHeight}
 function openTerm(){openUI("term",tEl);if(!outEl.children.length){out("PixelOS 1.0  -  workstation online","c");out("Type 'help' for commands.","m")}setTimeout(function(){try{inEl.focus({preventScroll:true})}catch(x){inEl.focus()}},30)}
 inEl.addEventListener("keydown",function(e){e.stopPropagation();
@@ -1566,6 +1701,40 @@ if(mqCalm.addEventListener)mqCalm.addEventListener("change",motion);else if(mqCa
 })();
 </script>
 
+<script>
+/* Anonymous inbox form. Set CONTACT_API to your Cloudflare Worker URL (see inbox-backend/README.md). */
+(function(){
+  var CONTACT_API="https://profile-inbox.YOUR-SUBDOMAIN.workers.dev";
+  var f=document.getElementById("ctForm");if(!f)return;
+  var ta=document.getElementById("ctMsg"),hp=document.getElementById("ctHp"),cnt=document.getElementById("ctCount"),
+      btn=document.getElementById("ctSend"),st=document.getElementById("ctStatus"),COOL=30000;
+  function say(t,c){st.textContent=t;st.className="ct-status"+(c?" "+c:"")}
+  function upd(){cnt.textContent=ta.value.length+" / 1000"}
+  ta.addEventListener("input",function(){upd();if(st.className.indexOf("bad")>-1)say("")});
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    var msg=ta.value.trim();
+    if(hp.value){say("Sent. Thank you!","ok");ta.value="";upd();return}
+    if(msg.length<3){say("Please write a little more.","bad");ta.focus();return}
+    var last=0;try{last=+localStorage.getItem("ct-last")||0}catch(x){}
+    if(Date.now()-last<COOL){say("Give it a few seconds before sending another.","bad");return}
+    if(CONTACT_API.indexOf("YOUR-")>-1){say("The inbox isn't connected yet.","bad");return}
+    var topic=(f.querySelector('input[name="ctTopic"]:checked')||{}).value||"Feedback";
+    btn.disabled=true;say("Sending...");
+    fetch(CONTACT_API+"/api/message",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({message:msg,topic:topic,hp:""}),credentials:"omit",referrerPolicy:"no-referrer"})
+    .then(function(r){
+      if(r.ok){ta.value="";upd();try{localStorage.setItem("ct-last",String(Date.now()))}catch(x){}say("Sent! Thank you, it arrived anonymously.","ok")}
+      else if(r.status===429)say("Too many messages for now. Try again later.","bad");
+      else if(r.status===400)say("That message couldn't be sent. Check the length and try again.","bad");
+      else say("Something went wrong. Please try again.","bad");
+    })
+    .catch(function(){say("Couldn't reach the inbox. Check your connection and retry.","bad")})
+    .then(function(){btn.disabled=false});
+  });
+  upd();
+})();
+</script>
 <script>
 (function(){
   var main=document.querySelector("main"),els=[].slice.call(document.querySelectorAll(".gdeco"));
