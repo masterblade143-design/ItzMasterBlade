@@ -333,6 +333,14 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
 .foot-star{display:block;width:60px;height:auto;margin:6px auto 8px;filter:drop-shadow(0 0 12px var(--glow));animation:starfloat 8s ease-in-out infinite}
 @media (max-width:760px){.starbox{width:104px}}
 @media (prefers-reduced-motion:reduce){.starbox img,.starbox::before,.starbox::after,.stardiv img,.foot-star{animation:none}}
+
+/* gutter decorations: only where there is free space outside the content column */
+.gdeco{position:absolute;display:none;width:var(--w);height:auto;pointer-events:none;z-index:1;filter:drop-shadow(0 0 10px var(--glow));animation:gbob 6s ease-in-out infinite;animation-delay:var(--d,0s)}
+.gdeco.px{image-rendering:pixelated}
+.gdeco.gl{left:calc(var(--w)*-1 - 24px)}.gdeco.gr{right:calc(var(--w)*-1 - 24px)}
+@keyframes gbob{50%{transform:translateY(-8px) rotate(var(--r,0deg))}}
+@media (min-width:1260px){.gdeco{display:block}}
+@media (prefers-reduced-motion:reduce){.gdeco{animation:none}}
 </style>
 </head>
 <body>
@@ -489,6 +497,10 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
       </div>
     </div>
   </section>
+
+  <img class="gdeco px gl" data-near=".games" style="--w:76px;--d:-1s" src="deco-cat.png" alt="" aria-hidden="true">
+  <img class="gdeco px gl" data-near=".projects" style="--w:70px;--d:-3s;--r:6deg" src="deco-orange.png" alt="" aria-hidden="true">
+  <img class="gdeco gr" data-near=".spotify" style="--w:58px;--d:-2s;--r:-6deg" src="deco-note.png" alt="" aria-hidden="true">
 
   <footer>
     <img class="foot-star" src="star-icon.png" alt="" aria-hidden="true">© ItzMasterBlade · built in the dark · <span id="ver">v1.2</span></footer>
@@ -1551,5 +1563,19 @@ if(mqCalm.addEventListener)mqCalm.addEventListener("change",motion);else if(mqCa
 })();
 </script>
 
+<script>
+(function(){
+  var main=document.querySelector("main"),els=[].slice.call(document.querySelectorAll(".gdeco"));
+  function place(){
+    els.forEach(function(el){
+      var t=document.querySelector(el.getAttribute("data-near"));
+      if(t)el.style.top=Math.round(t.offsetTop+(t.offsetHeight-el.offsetHeight)/2)+"px";
+    });
+  }
+  place();addEventListener("load",place);addEventListener("resize",place);
+  if(window.ResizeObserver)new ResizeObserver(place).observe(main);
+  els.forEach(function(el){el.addEventListener("load",place)});
+})();
+</script>
 </body>
 </html>
