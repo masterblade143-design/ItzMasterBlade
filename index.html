@@ -335,12 +335,15 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
 @media (prefers-reduced-motion:reduce){.starbox img,.starbox::before,.starbox::after,.stardiv img,.foot-star{animation:none}}
 
 /* gutter decorations: only where there is free space outside the content column */
-.gdeco{position:absolute;display:none;width:var(--w);height:auto;pointer-events:none;z-index:1;filter:drop-shadow(0 0 10px var(--glow));animation:gbob 6s ease-in-out infinite;animation-delay:var(--d,0s)}
+.gdeco{--ww:min(var(--w),calc((100vw - 980px)/2 - 30px));position:absolute;display:none;width:var(--ww);height:auto;pointer-events:none;z-index:1;filter:drop-shadow(0 0 10px var(--glow));animation:gbob 6s ease-in-out infinite;animation-delay:var(--d,0s)}
 .gdeco.px{image-rendering:pixelated}
-.gdeco.gl{left:calc(var(--w)*-1 - 24px)}.gdeco.gr{right:calc(var(--w)*-1 - 24px)}
+.gdeco.gl{left:calc(var(--ww)*-1 - 24px)}.gdeco.gr{right:calc(var(--ww)*-1 - 24px)}
+.gwrap{filter:none}.gwrap img{display:block;width:100%;height:auto;image-rendering:pixelated;filter:drop-shadow(0 0 10px var(--glow));transition:transform .4s cubic-bezier(.3,1.5,.5,1),filter .3s}
+.gwrap::before{content:"";position:absolute;inset:-40px;border-radius:50%;pointer-events:auto}
+.gwrap:hover{z-index:5}.gwrap:hover img{transform:scale(1.45);filter:drop-shadow(0 0 18px var(--violet))}
 @keyframes gbob{50%{transform:translateY(-8px) rotate(var(--r,0deg))}}
 @media (min-width:1260px){.gdeco{display:block}}
-@media (prefers-reduced-motion:reduce){.gdeco{animation:none}}
+@media (prefers-reduced-motion:reduce){.gdeco{animation:none}.gwrap img{transition:none}}
 </style>
 </head>
 <body>
@@ -498,9 +501,9 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
     </div>
   </section>
 
-  <img class="gdeco px gl" data-near=".games" style="--w:76px;--d:-1s" src="deco-cat.png" alt="" aria-hidden="true">
-  <img class="gdeco px gl" data-near=".projects" style="--w:70px;--d:-3s;--r:6deg" src="deco-orange.png" alt="" aria-hidden="true">
-  <img class="gdeco gr" data-near=".spotify" style="--w:58px;--d:-2s;--r:-6deg" src="deco-note.png" alt="" aria-hidden="true">
+  <div class="gdeco gwrap gl" data-near=".games" style="--w:128px;--d:-1s" aria-hidden="true"><img src="deco-cat.png" alt=""></div>
+  <img class="gdeco px gl" data-near=".projects" style="--w:116px;--d:-3s;--r:6deg" src="deco-orange.png" alt="" aria-hidden="true">
+  <img class="gdeco gr" data-near=".spotify" style="--w:96px;--d:-2s;--r:-6deg" src="deco-note.png" alt="" aria-hidden="true">
 
   <footer>
     <img class="foot-star" src="star-icon.png" alt="" aria-hidden="true">© ItzMasterBlade · built in the dark · <span id="ver">v1.2</span></footer>
