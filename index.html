@@ -317,11 +317,22 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
 .skin h4{font-family:var(--f-cond);font-weight:700;font-size:1.1rem;letter-spacing:.06em}
 #toast{font-family:var(--f-tech);font-weight:500}
 
-/* ===================== GAME LOGOS ===================== */
-.game strong{display:flex;align-items:center;gap:10px;font-size:1.05rem;letter-spacing:.02em}
-.game .gl{width:26px;height:26px;flex:none;padding:5px;border-radius:12px;box-sizing:content-box;background:color-mix(in srgb,var(--text) 6%,transparent);border:1px solid var(--line);color:var(--text);transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s}
-.game:hover .gl{transform:scale(1.1) rotate(-5deg);border-color:var(--bd)}
-@media (prefers-reduced-motion:reduce){.game .gl{transition:none}.game:hover .gl{transform:none}}
+/* chrome star accents */
+.starbox{position:relative;flex:0 0 auto;width:150px;aspect-ratio:1/1.12;display:grid;place-items:center;pointer-events:none}
+.starbox img{position:relative;z-index:1;width:76%;height:auto;filter:drop-shadow(0 0 12px var(--glow));animation:starfloat 7s ease-in-out infinite}
+.starbox::before,.starbox::after{content:"";position:absolute;left:27%;top:27%;width:46%;aspect-ratio:1;border-radius:50%;filter:blur(13px);animation:starorbit 9s linear infinite}
+.starbox::before{background:radial-gradient(circle,var(--violet),transparent 68%);opacity:.34}
+.starbox::after{background:radial-gradient(circle,var(--a2),transparent 68%);opacity:.24;animation-duration:14s;animation-direction:reverse}
+@keyframes starorbit{from{transform:rotate(0) translateX(32px) rotate(0)}to{transform:rotate(360deg) translateX(32px) rotate(-360deg)}}
+@keyframes starfloat{50%{transform:translateY(-7px) rotate(2deg)}}
+@keyframes starspin{to{transform:rotate(360deg)}}
+.stardiv{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:2px 4px}
+.stardiv i{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--violet));opacity:.45}
+.stardiv i:last-child{background:linear-gradient(270deg,transparent,var(--violet))}
+.stardiv img{width:46px;height:auto;filter:drop-shadow(0 0 10px var(--glow));animation:starspin 40s linear infinite}
+.foot-star{display:block;width:60px;height:auto;margin:6px auto 8px;filter:drop-shadow(0 0 12px var(--glow));animation:starfloat 8s ease-in-out infinite}
+@media (max-width:760px){.starbox{width:104px}}
+@media (prefers-reduced-motion:reduce){.starbox img,.starbox::before,.starbox::after,.stardiv img,.foot-star{animation:none}}
 </style>
 </head>
 <body>
@@ -357,6 +368,7 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
       <div class="tag"><i></i>online · he/him ·  · INFJ · 10/02</div>
       <p class="f-hero">Hey there! I'm Blade. I'm a gamer, a creator, and someone who's always curious about what’s on the horizon. Whether I'm diving into a new game world, tinkering with code and AI, or crafting something from scratch, I thrive on the thrill of transforming ideas into reality. Tech and creative challenges really fuel my passion, and I'm constantly on the lookout for new discoveries and projects to tackle. I'm all about learning, building, and exploring. So glad you stopped by my little corner of the internet!~</p>
     </div>
+    <div class="starbox" aria-hidden="true"><img src="star-blue.png" alt=""></div>
   </section>
 
   <section class="card ticker" aria-label="Personal updates">
@@ -410,10 +422,10 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
   <section class="card games">
     <h2>// games</h2>
     <div class="gamegrid">
-      <div class="game"><strong><svg class="gl" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><polygon points="14,2 26,8.5 14,15 2,8.5" fill="#6cc24a"/><polygon points="2,8.5 14,15 14,26.5 2,20" fill="#8b5a34"/><polygon points="26,8.5 14,15 14,26.5 26,20" fill="#6a4226"/><polygon points="2,8.5 14,15 14,18.4 2,12" fill="#4d9a38"/><polygon points="26,8.5 14,15 14,18.4 26,12" fill="#3b7d2b"/><polygon points="14,2 26,8.5 14,15 2,8.5" fill="none" stroke="rgba(255,255,255,.25)" stroke-width=".8"/></svg>Minecraft</strong><span>Builds, redstone, survival</span><div class="bar"><i style="--w:92%"></i></div></div>
-      <div class="game"><strong><svg class="gl" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><g transform="rotate(14 14 14)"><path fill="currentColor" fill-rule="evenodd" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M5.5 5.5h17v17h-17z M11 11v6h6v-6z"/></g></svg>Roblox</strong><span>Obbies, tycoons, hangouts</span><div class="bar"><i style="--w:80%"></i></div></div>
-      <div class="game"><strong><svg class="gl" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><defs><linearGradient id="gA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb02e"/><stop offset="1" stop-color="#ff3b1f"/></linearGradient></defs><polygon points="14,2.5 26.5,26 20.6,26 14,13.4 7.4,26 1.5,26" fill="url(#gA)"/><polygon points="8.6,20.2 19.4,20.2 20.7,23 7.3,23" fill="url(#gA)"/><polygon points="3,26 25,26 25,27.2 3,27.2" fill="url(#gA)" opacity=".55"/></svg>Asphalt Legends</strong><span>Drifts, nitro, events</span><div class="bar"><i style="--w:75%"></i></div></div>
-      <div class="game"><strong><svg class="gl" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path fill="#e6a23c" d="M14 1.8c.9 0 1.5 1.6 1.7 4.2l.4 4.6 9.9 5.7v3.2l-9.8-2.6.3 5.1 2.9 2.4v2.3L14 24.9l-5.4 1.8v-2.3l2.9-2.4.3-5.1-9.8 2.6v-3.2l9.9-5.7.4-4.6c.2-2.6.8-4.2 1.7-4.2z"/><circle cx="14" cy="9.5" r="1.1" fill="#1a1a1a" opacity=".55"/></svg>War Thunder</strong><span>Tanks, planes, realistic battles</span><div class="bar"><i style="--w:70%"></i></div></div>
+      <div class="game"><strong>⛏ Minecraft</strong><span>Builds, redstone, survival</span><div class="bar"><i style="--w:92%"></i></div></div>
+      <div class="game"><strong>🧱 Roblox</strong><span>Obbies, tycoons, hangouts</span><div class="bar"><i style="--w:80%"></i></div></div>
+      <div class="game"><strong>🏎 Asphalt Legends</strong><span>Drifts, nitro, events</span><div class="bar"><i style="--w:75%"></i></div></div>
+      <div class="game"><strong>🛡 War Thunder</strong><span>Tanks, planes, realistic battles</span><div class="bar"><i style="--w:70%"></i></div></div>
     </div>
   </section>
 
@@ -450,6 +462,8 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
     <p class="hint pw-help"><span class="pc"><kbd>←</kbd><kbd>→</kbd>/<kbd>A</kbd><kbd>D</kbd> move · <kbd>↑</kbd>/<kbd>W</kbd>/<kbd>Space</kbd> jump · <kbd>S</kbd> drop through · <kbd>Shift</kbd> run · <kbd>E</kbd> interact · <kbd>J</kbd> journal · <kbd>M</kbd> sound · <kbd>F</kbd> expand · <kbd>T</kbd> time · <kbd>G</kbd> weather</span><span class="tc">Use the on-screen pad to move, jump and interact. Tap the buttons up top for journal, sound and more.</span></p>
   </section>
 
+  <div class="stardiv" aria-hidden="true"><i></i><img src="star-chrome.png" alt=""><i></i></div>
+
   <section class="card projects">
     <div class="ph">
       <h2>// project archive</h2>
@@ -476,7 +490,8 @@ h2{font-family:var(--f-tech);font-weight:600;font-size:.8rem;letter-spacing:.2em
     </div>
   </section>
 
-  <footer>© ItzMasterBlade · built in the dark · <span id="ver">v1.2</span></footer>
+  <footer>
+    <img class="foot-star" src="star-icon.png" alt="" aria-hidden="true">© ItzMasterBlade · built in the dark · <span id="ver">v1.2</span></footer>
 </main>
 <div id="toast" role="status"></div>
 
