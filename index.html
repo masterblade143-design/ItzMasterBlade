@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ItzMasterBlade⚚</title>
+<title>ItzMasterBlade</title>
 <script>try{var t=localStorage.getItem("mb-theme");if(t==="midnight"||t==="onyx"||t==="starlight"||t==="halloween"||t==="eclipse"||t==="frost"||t==="forest")document.documentElement.setAttribute("data-theme",t);var q=Date.now()+19800000,m=Math.floor(q/60000)%1440;if((m>=1200||m<300)&&localStorage.getItem("mb-moon")===new Date(q-(m<300?864e5:0)).toISOString().slice(0,10))document.documentElement.setAttribute("data-theme","moonlight")}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +43,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.3;z-
   background-size:48px 48px;-webkit-mask-image:radial-gradient(circle at 50% 0,#000,transparent 70%);mask-image:radial-gradient(circle at 50% 0,#000,transparent 70%)}
 #halo{position:fixed;left:0;top:0;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;pointer-events:none;z-index:1;opacity:0;transition:opacity .4s;
   background:radial-gradient(circle,var(--halo),transparent 65%);will-change:transform}
-main{position:relative;z-index:2;max-width:980px;margin:0 auto;padding:28px 18px 48px;display:grid;gap:18px;grid-template-columns:repeat(12,1fr)}
+main{position:relative;z-index:2;max-width:980px;margin:0 auto;padding:calc(var(--lh) + 8px) 18px 48px;display:grid;gap:18px;grid-template-columns:repeat(12,1fr)}
 /* frosted glass */
 .card{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--hi),transparent 45%),var(--card);border:1px solid var(--line);border-radius:24px;padding:22px;
   backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);
@@ -372,7 +372,7 @@ html[data-theme="starlight"] .mn-cr circle{stroke:rgba(70,50,160,.3)}
 #sparkle .moon{display:none}
 @keyframes moonfloat{50%{transform:translateY(4px) rotate(-3deg)}}
 @keyframes mntw{50%{opacity:.25}}
-@media (max-width:640px){html.moon-on main{padding-top:72px}}
+@media (max-width:640px){html.moon-on main{padding-top:calc(var(--lh) + 52px)}}
 @media (prefers-reduced-motion:reduce){.moonbtn,.moonbtn.show{transition:none;animation:none}.mn-s{animation:none}}
 
 /* chrome star accents */
@@ -402,6 +402,20 @@ html[data-theme="starlight"] .mn-cr circle{stroke:rgba(70,50,160,.3)}
 @keyframes gbob{50%{transform:translateY(-8px) rotate(var(--r,0deg))}}
 @media (min-width:1260px){.gdeco{display:block}}
 @media (prefers-reduced-motion:reduce){.gdeco{animation:none}.gwrap img{transition:none}}
+
+/* hanging star lights */
+:root{--lh:clamp(92px,11vw,150px);--lf:none;--lg:rgba(150,212,255,.75)}
+:root[data-theme="halloween"]{--lf:hue-rotate(172deg) saturate(1.15);--lg:rgba(255,184,92,.75)}
+:root[data-theme="eclipse"]{--lf:hue-rotate(140deg);--lg:rgba(255,120,120,.75)}
+:root[data-theme="forest"]{--lf:hue-rotate(-82deg);--lg:rgba(120,240,170,.7)}
+:root[data-theme="moonlight"]{--lf:hue-rotate(52deg);--lg:rgba(200,170,255,.75)}
+.lights{position:absolute;top:0;left:0;right:0;height:var(--lh);display:flex;overflow:hidden;pointer-events:none;z-index:3}
+.lt{position:relative;flex:none;height:100%;aspect-ratio:577/263}
+.lt.f{transform:scaleX(-1)}
+.lt img{display:block;width:100%;height:100%;filter:var(--lf) drop-shadow(0 0 4px var(--lg))}
+.lt i{position:absolute;width:calc(var(--lh)*.3);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95) 0,var(--lg) 28%,transparent 68%);opacity:.3;animation:ltw var(--t,3s) ease-in-out infinite;animation-delay:var(--dl,0s)}
+@keyframes ltw{50%{opacity:.85}}
+@media (prefers-reduced-motion:reduce){.lt i{animation:none;opacity:.55}}
 </style>
 </head>
 <body>
@@ -445,6 +459,7 @@ html[data-theme="starlight"] .mn-cr circle{stroke:rgba(70,50,160,.3)}
     <use class="mn-s" href="#mnS" x="45" y="13" fill="var(--mn2)"/><use class="mn-s" href="#mnS" fill="var(--mn2)" transform="translate(50.5 24) scale(.7)"/>
   </svg>
 </button>
+<div class="lights" aria-hidden="true"></div>
 <main>
   <section class="card hero">
     <div class="tilt-wrap">
@@ -454,7 +469,7 @@ html[data-theme="starlight"] .mn-cr circle{stroke:rgba(70,50,160,.3)}
       </div>
     </div>
     <div class="who">
-      <h1>ItzMasterBlade⚚</h1>
+      <h1>ItzMasterBlade</h1>
       <div class="tag"><i></i>online · he/him ·  · INFJ · 10/02</div>
       <p class="f-hero">Hey there! I'm Blade. I'm a gamer, a creator, and someone who's always curious about what’s on the horizon. Whether I'm diving into a new game world, tinkering with code and AI, or crafting something from scratch, I thrive on the thrill of transforming ideas into reality. Tech and creative challenges really fuel my passion, and I'm constantly on the lookout for new discoveries and projects to tackle. I'm all about learning, building, and exploring. So glad you stopped by my little corner of the internet!~</p>
     </div>
@@ -1747,6 +1762,23 @@ if(mqCalm.addEventListener)mqCalm.addEventListener("change",motion);else if(mqCa
   place();addEventListener("load",place);addEventListener("resize",place);
   if(window.ResizeObserver)new ResizeObserver(place).observe(main);
   els.forEach(function(el){el.addEventListener("load",place)});
+})();
+</script>
+<script>
+(function(){
+  var box=document.querySelector(".lights"),P=[[0.8466,0.1992],[0.4624,0.2923],[0.8867,0.355],[0.7771,0.4343],[0.2847,0.4537],[0.8118,0.5205],[0.0493,0.5335],[0.4116,0.5754],[0.2279,0.5916],[0.1021,0.6135],[0.7342,0.6317],[0.5902,0.671],[0.1734,0.7059],[0.9502,0.7274],[0.5505,0.8615],[0.6829,0.9186],[0.3302,0.9611]];
+  function build(){
+    var h=box.clientHeight||120,n=Math.ceil(innerWidth/(h*577/263))+1;
+    if(box.childElementCount===n)return;
+    box.textContent="";
+    for(var k=0;k<n;k++){
+      var t=document.createElement("div");t.className="lt"+(k%2?" f":"");
+      var im=new Image();im.src="lights.png";im.alt="";im.draggable=false;t.appendChild(im);
+      P.forEach(function(p,j){var d=document.createElement("i");d.style.cssText="left:"+p[0]*100+"%;top:"+p[1]*100+"%;--t:"+(2.4+(j*.37+k*.21)%2.2).toFixed(2)+"s;--dl:-"+((j*.53+k*.7)%3).toFixed(2)+"s";t.appendChild(d)});
+      box.appendChild(t);
+    }
+  }
+  build();var rt;addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(build,150)});
 })();
 </script>
 </body>
