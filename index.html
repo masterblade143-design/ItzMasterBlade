@@ -421,11 +421,6 @@ html[data-theme="starlight"] .mn-cr circle{stroke:rgba(70,50,160,.3)}
 .gcorner{grid-column:1/-1;display:grid;gap:18px}
 .gchead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;padding:4px 6px 0;border-bottom:1px solid var(--line);padding-bottom:12px}
 .gct h2{margin:0 0 4px}.gct p{font-size:.88rem}
-.gsprites{display:flex;align-items:flex-end;gap:22px;padding-right:10px}
-.sprite{position:relative;width:var(--w);flex:none;animation:gbob 6s ease-in-out infinite;animation-delay:var(--d,0s)}
-.sprite img{display:block;width:100%;height:auto;image-rendering:pixelated;transform-origin:50% 90%;filter:drop-shadow(0 0 8px var(--glow));transition:transform .4s cubic-bezier(.3,1.5,.5,1),filter .3s}
-.sprite::before{content:"";position:absolute;inset:-34px;border-radius:50%}
-.sprite:hover{z-index:6}.sprite:hover img{transform:scale(1.6);filter:drop-shadow(0 0 16px var(--violet))}
 .mcw{grid-column:1/-1}
 .mch{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}.mch h2{margin:0}
 .mcbadge{font:.7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--chipbg);color:var(--mute)}
@@ -437,7 +432,6 @@ html[data-theme="starlight"] .mn-cr circle{stroke:rgba(70,50,160,.3)}
 .mcshot.ph span{font-size:1.6rem;color:var(--violet)}.mcshot.ph small{font:.7rem var(--mono);letter-spacing:.1em;text-transform:uppercase}
 .mcshot.wide{grid-column:span 2}
 @media (max-width:560px){.mcshot.wide{grid-column:auto}}
-@media (prefers-reduced-motion:reduce){.sprite{animation:none}.sprite img{transition:none}}
 </style>
 </head>
 <body>
@@ -567,10 +561,6 @@ html[data-theme="starlight"] .mn-cr circle{stroke:rgba(70,50,160,.3)}
   <section class="gcorner" id="gaming" aria-labelledby="gcTitle">
     <div class="gchead">
       <div class="gct"><h2 id="gcTitle">// gaming corner</h2><p>Skins, worlds and a little pixel adventure.</p></div>
-      <div class="gsprites" aria-hidden="true">
-        <div class="sprite" style="--w:62px;--d:-1s"><img src="sprite-1.png" alt=""></div>
-        <div class="sprite" style="--w:54px;--d:-3s;--r:-4deg"><img src="sprite-2.png" alt=""></div>
-      </div>
     </div>
   <section class="card fitcheck">
     <h2>// Fitcheck</h2>
@@ -664,6 +654,9 @@ html[data-theme="starlight"] .mn-cr circle{stroke:rgba(70,50,160,.3)}
   <div class="gdeco gwrap gl" data-near=".games" style="--w:128px;--d:-1s" aria-hidden="true"><img src="deco-cat.png" alt=""></div>
   <img class="gdeco px gl" data-near=".projects" style="--w:116px;--d:-3s;--r:6deg" src="deco-orange.png" alt="" aria-hidden="true">
   <img class="gdeco gr" data-near=".spotify" style="--w:96px;--d:-2s;--r:-6deg" src="deco-note.png" alt="" aria-hidden="true">
+
+  <div class="gdeco gwrap gr" data-near=".fitcheck" style="--w:150px;--d:-4s;--r:5deg" aria-hidden="true"><img src="sprite-1.png" alt=""></div>
+  <div class="gdeco gwrap gl" data-near=".mcw" style="--w:140px;--d:-2s;--r:-5deg" aria-hidden="true"><img src="sprite-2.png" alt=""></div>
 
   <footer>
     <img class="foot-star" src="star-icon.png" alt="" aria-hidden="true">
