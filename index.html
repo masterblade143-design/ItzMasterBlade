@@ -439,6 +439,16 @@ html[data-theme="starlight"] .mn-cr circle{stroke:rgba(70,50,160,.3)}
 .gwrap.glow:hover::after{transform:scale(1.55);opacity:.85}
 @keyframes gpulse{50%{scale:1.14}}
 @media (prefers-reduced-motion:reduce){.gwrap.glow::after{animation:none;transition:none}}
+
+/* hero quote */
+.quote{display:flex;align-items:center;gap:10px;margin:14px 0 0;padding:7px 14px 7px 10px;width:max-content;max-width:100%;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--violet) 9%,transparent)}
+.quote .qe{font-size:1.05rem;line-height:1;filter:drop-shadow(0 0 6px var(--glow));animation:qpulse 3.2s ease-in-out infinite}
+.quote .qt{font-family:var(--f-clock,"Oxanium",sans-serif);font-weight:600;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;background:linear-gradient(100deg,var(--h1a,var(--violet)),var(--h1b,#fff),var(--h1c,var(--violet)),var(--h1a,var(--violet)));background-size:240% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:qshine 7s linear infinite}
+.quote b{font-weight:700;opacity:.7;margin:0 .2em}
+@keyframes qpulse{50%{transform:scale(1.18) rotate(-8deg)}}
+@keyframes qshine{to{background-position:240% 0}}
+@media (max-width:560px){.quote{width:auto;flex-wrap:wrap;border-radius:16px}.quote .qt{font-size:.7rem;letter-spacing:.12em}}
+@media (prefers-reduced-motion:reduce){.quote .qe,.quote .qt{animation:none}}
 </style>
 </head>
 <body>
@@ -495,7 +505,8 @@ html[data-theme="starlight"] .mn-cr circle{stroke:rgba(70,50,160,.3)}
       <h1>ItzMasterBlade</h1>
       <div class="tag"><i></i>online · he/him ·  · INFJ · 10/02</div>
       <p class="f-hero">Hey there! I'm Blade. I'm a gamer, a creator, and someone who's always curious about what’s on the horizon. Whether I'm diving into a new game world, tinkering with code and AI, or crafting something from scratch, I thrive on the thrill of transforming ideas into reality. Tech and creative challenges really fuel my passion, and I'm constantly on the lookout for new discoveries and projects to tackle. I'm all about learning, building, and exploring. So glad you stopped by my little corner of the internet!~</p>
-    </div>
+      <p class="quote"><span class="qe" aria-hidden="true">🎯</span><span class="qt">Sharp Aim <b>·</b> Perfect Accuracy <b>·</b> No Single Mistake</span></p>
+      </div>
     <div class="starbox" aria-hidden="true"><img src="star-blue.png" alt=""></div>
   </section>
 
