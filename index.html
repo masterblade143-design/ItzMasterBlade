@@ -449,7 +449,50 @@ html[data-theme="starlight"] .mn-cr circle{stroke:rgba(70,50,160,.3)}
 @keyframes qshine{to{background-position:240% 0}}
 @media (max-width:560px){.quote{width:auto;flex-wrap:wrap;border-radius:16px}.quote .qt{font-size:.7rem;letter-spacing:.12em}}
 @media (prefers-reduced-motion:reduce){.quote .qe,.quote .qt{animation:none}}
+
+/* ===== UPGRADE: cursor, dock, layouts, glass polish ===== */
+.cur-dot,.cur-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:99999;opacity:0;will-change:transform}
+.cur-dot{width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px var(--violet),0 0 14px var(--violet);transition:opacity .3s,width .25s var(--spring),height .25s var(--spring),margin .25s var(--spring)}
+.cur-ring{width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;border:1.5px solid color-mix(in srgb,var(--violet) 80%,transparent);background:color-mix(in srgb,var(--violet) 7%,transparent);backdrop-filter:blur(2px) saturate(150%);-webkit-backdrop-filter:blur(2px) saturate(150%);transition:opacity .3s,width .35s var(--spring),height .35s var(--spring),margin .35s var(--spring),background .3s,border-color .3s}
+html.cur-on .cur-dot,html.cur-on .cur-ring{opacity:1}
+html.cur-hide .cur-dot,html.cur-hide .cur-ring{opacity:0}
+html.cur-link .cur-ring{width:62px;height:62px;margin:-31px 0 0 -31px;background:color-mix(in srgb,var(--violet) 18%,transparent)}
+html.cur-link .cur-dot{width:4px;height:4px;margin:-2px 0 0 -2px}
+html.cur-down .cur-ring{width:26px;height:26px;margin:-13px 0 0 -13px}
+html.cur-ok,html.cur-ok *{cursor:none!important}
+html.cur-ok input,html.cur-ok textarea,html.cur-ok select{cursor:text!important}
+.cur-pulse{position:fixed;left:0;top:0;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;border:2px solid var(--violet);pointer-events:none;z-index:99998;animation:cpulse .65s var(--ease) forwards}
+@keyframes cpulse{to{transform:translate(var(--px),var(--py)) scale(4);opacity:0}}
+#sp{position:fixed;left:0;top:0;height:3px;width:100%;z-index:30;transform-origin:left;transform:scaleX(0);background:var(--grad);box-shadow:0 0 12px var(--glow);pointer-events:none}
+.dock{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:6px;padding:5px;max-width:calc(100vw - 20px);border-radius:999px;
+  background:linear-gradient(135deg,var(--hi),transparent 55%),color-mix(in srgb,var(--bg1) 48%,transparent);border:1px solid var(--line);backdrop-filter:blur(26px) saturate(180%);-webkit-backdrop-filter:blur(26px) saturate(180%);
+  box-shadow:0 18px 44px -14px rgba(0,0,0,.45),0 8px 30px -10px var(--glow),inset 0 1px 0 var(--hi);animation:dockin .9s var(--spring) .5s backwards}
+@keyframes dockin{from{opacity:0;transform:translate(-50%,46px) scale(.9)}}
+.dk-nav,.dk-lay{display:flex;gap:2px;align-items:center}
+.dk-nav{overflow-x:auto;scrollbar-width:none}.dk-nav::-webkit-scrollbar{display:none}
+.dk-sep{width:1px;height:20px;background:var(--line);flex:0 0 auto}
+.dock a,.dock button{all:unset;box-sizing:border-box;flex:0 0 auto;display:grid;place-items:center;padding:8px 14px;border-radius:999px;font:600 .78rem var(--font);color:var(--mute);cursor:pointer;white-space:nowrap;transition:color .3s,background .3s,transform .3s var(--spring),box-shadow .3s}
+.dock a:hover,.dock button:hover{color:var(--text);background:var(--tile)}
+.dock a:active,.dock button:active{transform:scale(.92)}
+.dock a.on,.dock button[aria-pressed="true"]{color:#fff;background:var(--grad);box-shadow:0 6px 16px -6px var(--glow),inset 0 1px 0 rgba(255,255,255,.3)}
+.dock button{padding:8px 10px}.dock svg{width:16px;height:16px;fill:currentColor;display:block}
+.dock :focus-visible{outline:2px solid var(--violet);outline-offset:1px}
+#about,#gaming,#projects,#music,#contact{scroll-margin-top:24px}
+#toast{bottom:calc(84px + env(safe-area-inset-bottom,0px));color:var(--text);border:1px solid var(--line);background:linear-gradient(135deg,var(--hi),transparent 60%),color-mix(in srgb,var(--bg1) 62%,transparent);backdrop-filter:blur(22px) saturate(170%);-webkit-backdrop-filter:blur(22px) saturate(170%)}
+footer{justify-self:center;display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:var(--tile);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);margin-bottom:60px}
+.pw-start{backdrop-filter:blur(6px) saturate(140%);-webkit-backdrop-filter:blur(6px) saturate(140%)}
+main{animation:mainin .9s var(--ease) backwards}@keyframes mainin{from{opacity:0}}
+html[data-layout="stack"] main{max-width:720px;grid-template-columns:1fr}
+html[data-layout="stack"] main>.card,html[data-layout="stack"] main>.gcorner{grid-column:1/-1!important}
+@media (min-width:761px){
+  html[data-layout="dense"] main{grid-auto-flow:dense}
+  html[data-layout="dense"] .about,html[data-layout="dense"] .links,html[data-layout="dense"] .games,html[data-layout="dense"] .interests,html[data-layout="dense"] .clock,html[data-layout="dense"] .themes{grid-column:span 6}
+  html[data-layout="dense"] .pgrid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+}
+@media (max-width:760px){.dk-lay,.dk-sep.l{display:none}.dock a{padding:8px 11px}}
+@media (prefers-reduced-motion:reduce){.dock,main{animation:none}.cur-pulse{display:none}}
 </style>
+<script>try{var l=localStorage.getItem("mb-layout");if(l==="stack"||l==="dense")document.documentElement.setAttribute("data-layout",l)}catch(e){}</script>
 </head>
 <body>
 <div class="aurora" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -682,6 +725,18 @@ html[data-theme="starlight"] .mn-cr circle{stroke:rgba(70,50,160,.3)}
     <img class="foot-star" src="star-icon.png" alt="" aria-hidden="true">
     © ItzMasterBlade · built in the dark · <span id="ver">v1.2</span></footer>
 </main>
+<div class="cur-dot" aria-hidden="true"></div><div class="cur-ring" aria-hidden="true"></div><div id="sp" aria-hidden="true"></div>
+<nav class="dock" id="dock" aria-label="Page navigation">
+  <div class="dk-nav"><a href="#about">About</a><a href="#gaming">Games</a><a href="#projects">Projects</a><a href="#music">Music</a><a href="#contact">Contact</a></div>
+  <span class="dk-sep l"></span>
+  <div class="dk-lay" role="group" aria-label="Layout">
+    <button type="button" data-lay="bento" aria-pressed="true" aria-label="Bento layout" title="Bento"><svg viewBox="0 0 16 16"><rect x="1" y="1" width="9" height="6" rx="1.6"/><rect x="12" y="1" width="3" height="6" rx="1.2"/><rect x="1" y="9" width="4" height="6" rx="1.2"/><rect x="7" y="9" width="8" height="6" rx="1.6"/></svg></button>
+    <button type="button" data-lay="stack" aria-pressed="false" aria-label="Stacked layout" title="Stack"><svg viewBox="0 0 16 16"><rect x="2" y="1.5" width="12" height="3.2" rx="1.2"/><rect x="2" y="6.4" width="12" height="3.2" rx="1.2"/><rect x="2" y="11.3" width="12" height="3.2" rx="1.2"/></svg></button>
+    <button type="button" data-lay="dense" aria-pressed="false" aria-label="Dense layout" title="Dense"><svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="6" height="6" rx="1.4"/><rect x="8.5" y="1.5" width="6" height="6" rx="1.4"/><rect x="1.5" y="8.5" width="6" height="6" rx="1.4"/><rect x="8.5" y="8.5" width="6" height="6" rx="1.4"/></svg></button>
+  </div>
+  <span class="dk-sep"></span>
+  <button type="button" id="dkTop" aria-label="Back to top" title="Top"><svg viewBox="0 0 16 16"><path d="M8 2.5 13.5 8l-1.1 1.1L8.8 5.5V13.5H7.2V5.5L3.6 9.100 2.500 8z"/></svg></button>
+</nav>
 <div id="toast" role="status"></div>
 
 <script>
@@ -1836,6 +1891,72 @@ if(mqCalm.addEventListener)mqCalm.addEventListener("change",motion);else if(mqCa
     }
   }
   build();var rt;addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(build,150)});
+})();
+</script>
+<script>
+(function(){
+  var root=document.documentElement,calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function $(q){return document.querySelector(q)}
+  // ids for dock targets
+  [[".about","about"],[".projects","projects"],[".spotify","music"]].forEach(function(a){var e=$(a[0]);if(e&&!e.id)e.id=a[1]});
+
+  // custom cursor (mouse only)
+  if(matchMedia("(hover:hover) and (pointer:fine)").matches&&!calm){
+    var dot=$(".cur-dot"),ring=$(".cur-ring"),x=-99,y=-99,rx=-99,ry=-99,on=false;
+    var LINK='a,button,[role="button"],[role="radio"],label,.chip,.game,.proj,.avatar,.pw-tb,.seg,summary';
+    root.classList.add("cur-ok");
+    addEventListener("pointermove",function(e){
+      if(e.pointerType==="touch")return;
+      x=e.clientX;y=e.clientY;if(!on){on=true;rx=x;ry=y;root.classList.add("cur-on")}
+      dot.style.transform="translate3d("+x+"px,"+y+"px,0)";
+      var t=e.target.closest?e.target:null;
+      root.classList.toggle("cur-hide",!!(t&&t.closest("iframe,input,textarea,select")));
+      root.classList.toggle("cur-link",!!(t&&t.closest(LINK)));
+    },{passive:true});
+    document.addEventListener("pointerleave",function(){root.classList.remove("cur-on");on=false});
+    addEventListener("pointerdown",function(e){
+      root.classList.add("cur-down");
+      var p=document.createElement("div");p.className="cur-pulse";p.style.setProperty("--px",e.clientX+"px");p.style.setProperty("--py",e.clientY+"px");
+      p.style.transform="translate("+e.clientX+"px,"+e.clientY+"px)";document.body.appendChild(p);setTimeout(function(){p.remove()},700);
+    });
+    addEventListener("pointerup",function(){root.classList.remove("cur-down")});
+    (function loop(){rx+=(x-rx)*.18;ry+=(y-ry)*.18;ring.style.transform="translate3d("+rx+"px,"+ry+"px,0)";requestAnimationFrame(loop)})();
+  }
+
+  // scroll progress + dock scrollspy
+  var sp=$("#sp"),tick=false;
+  function prog(){tick=false;var h=root.scrollHeight-innerHeight;sp.style.transform="scaleX("+(h>0?Math.min(1,scrollY/h):0)+")"}
+  addEventListener("scroll",function(){if(!tick){tick=true;requestAnimationFrame(prog)}},{passive:true});prog();
+  var links=[].slice.call(document.querySelectorAll(".dk-nav a")),nav=$(".dk-nav");
+  function mark(id){links.forEach(function(a){var o=a.getAttribute("href")==="#"+id;a.classList.toggle("on",o);if(o&&nav.scrollWidth>nav.clientWidth)nav.scrollTo({left:a.offsetLeft-30,behavior:calm?"auto":"smooth"})})}
+  links.forEach(function(a){
+    a.addEventListener("click",function(e){var t=$(a.getAttribute("href"));if(t){e.preventDefault();t.scrollIntoView({behavior:calm?"auto":"smooth",block:"start"})}});
+    var t=$(a.getAttribute("href"));
+    if(t&&"IntersectionObserver" in window)new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting)mark(t.id)})},{rootMargin:"-35% 0px -55% 0px"}).observe(t);
+  });
+  addEventListener("scroll",function(){if(scrollY<200)links.forEach(function(a){a.classList.remove("on")})},{passive:true});
+  $("#dkTop").addEventListener("click",function(){scrollTo({top:0,behavior:calm?"auto":"smooth"})});
+
+  // dynamic layouts with FLIP animation
+  var lb=[].slice.call(document.querySelectorAll("[data-lay]"));
+  function paint(l){
+    if(l==="bento")root.removeAttribute("data-layout");else root.setAttribute("data-layout",l);
+    lb.forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-lay")===l)});
+  }
+  function setLayout(l){
+    var cs=[].slice.call(document.querySelectorAll("main>.card,main>.gcorner")),f=cs.map(function(c){return c.getBoundingClientRect()});
+    paint(l);try{localStorage.setItem("mb-layout",l)}catch(e){}
+    if(!calm)cs.forEach(function(c,i){
+      var a=f[i],b=c.getBoundingClientRect(),vh=innerHeight;
+      if((a.bottom<-150&&b.bottom<-150)||(a.top>vh+150&&b.top>vh+150)||!b.width||!b.height)return;
+      var dx=a.left-b.left,dy=a.top-b.top,sx=a.width/b.width,sy=c.classList.contains("gcorner")?1:a.height/b.height;
+      if(Math.abs(dx)+Math.abs(dy)<2&&Math.abs(1-sx)<.01&&Math.abs(1-sy)<.01)return;
+      c.animate([{transformOrigin:"0 0",transform:"translate("+dx+"px,"+dy+"px) scale("+sx+","+sy+")"},{transformOrigin:"0 0",transform:"none"}],{duration:620,easing:"cubic-bezier(.2,.8,.2,1)"});
+    });
+    setTimeout(function(){dispatchEvent(new Event("resize"))},650);
+  }
+  lb.forEach(function(b){b.addEventListener("click",function(){var l=b.getAttribute("data-lay");if(b.getAttribute("aria-pressed")!=="true")setLayout(l)})});
+  paint(root.getAttribute("data-layout")||"bento");
 })();
 </script>
 </body>
