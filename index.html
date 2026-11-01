@@ -463,13 +463,15 @@ html[data-theme="starlight"] .mn-cr circle{stroke:rgba(70,50,160,.3)}
 
 /* ===== UPGRADE: cursor, dock, layouts, glass polish ===== */
 .cur-dot,.cur-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:99999;opacity:0;will-change:transform}
-.cur-dot{width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px var(--violet),0 0 14px var(--violet);transition:opacity .3s,width .25s var(--spring),height .25s var(--spring),margin .25s var(--spring)}
-.cur-ring{width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;border:1.5px solid color-mix(in srgb,var(--violet) 80%,transparent);background:color-mix(in srgb,var(--violet) 7%,transparent);backdrop-filter:blur(2px) saturate(150%);-webkit-backdrop-filter:blur(2px) saturate(150%);transition:opacity .3s,width .35s var(--spring),height .35s var(--spring),margin .35s var(--spring),background .3s,border-color .3s}
-html.cur-on .cur-dot,html.cur-on .cur-ring{opacity:1}
-html.cur-hide .cur-dot,html.cur-hide .cur-ring{opacity:0}
-html.cur-link .cur-ring{width:62px;height:62px;margin:-31px 0 0 -31px;background:color-mix(in srgb,var(--violet) 18%,transparent)}
-html.cur-link .cur-dot{width:4px;height:4px;margin:-2px 0 0 -2px}
-html.cur-down .cur-ring{width:26px;height:26px;margin:-13px 0 0 -13px}
+.cur-dot{width:0;height:0;margin:0;transition:opacity .3s}
+.cur-ring{display:none}
+.ship{position:absolute;left:-13px;top:0;width:26px;height:auto;overflow:visible;transform-origin:50% 0;transition:scale .25s var(--spring);filter:drop-shadow(0 0 4px var(--violet)) drop-shadow(0 0 12px color-mix(in srgb,var(--violet) 55%,transparent))}
+.ship .flame{transform-box:fill-box;transform-origin:50% 0;animation:flick .11s ease-in-out infinite alternate}
+@keyframes flick{to{opacity:.7}}
+html.cur-on .cur-dot{opacity:1}
+html.cur-hide .cur-dot{opacity:0}
+html.cur-link .ship{scale:1.28}
+html.cur-down .ship{scale:.86}
 html.cur-ok,html.cur-ok *{cursor:none!important}
 html.cur-ok input,html.cur-ok textarea,html.cur-ok select{cursor:text!important}
 .cur-pulse{position:fixed;left:0;top:0;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;border:2px solid var(--violet);pointer-events:none;z-index:99998;animation:cpulse .65s var(--ease) forwards}
@@ -780,7 +782,7 @@ html[data-theme="starlight"] #grain{opacity:.05;mix-blend-mode:multiply}
     <img class="foot-star" src="assets/img/star-icon.png" alt="" aria-hidden="true">
     © ItzMasterBlade · built in the dark · <span id="ver">v1.2</span></footer>
 </main>
-<div class="cur-dot" aria-hidden="true"></div><div class="cur-ring" aria-hidden="true"></div><div id="sp" aria-hidden="true"></div>
+<div class="cur-dot" aria-hidden="true"><svg class="ship" viewBox="0 0 32 54" aria-hidden="true" focusable="false"><defs><linearGradient id="shHull" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:#fff"/><stop offset=".55" style="stop-color:color-mix(in srgb,var(--violet) 55%,#fff)"/><stop offset="1" style="stop-color:var(--violet)"/></linearGradient><linearGradient id="shFlame" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:#fff"/><stop offset=".45" style="stop-color:var(--violet)"/><stop offset="1" style="stop-color:var(--violet);stop-opacity:0"/></linearGradient></defs><g class="flame"><path d="M12.5 33 L16 53 L19.5 33Z" fill="url(#shFlame)"/></g><path d="M16 0 L21 14 L31 35 L21.5 31 L16 37 L10.5 31 L1 35 L11 14Z" fill="url(#shHull)" stroke="#fff" stroke-width="1" stroke-linejoin="round"/><path d="M16 8.5 L19.5 20 L16 24 L12.5 20Z" style="fill:#0b1030;opacity:.85"/><path d="M16 25 V34" style="stroke:#0b1030;opacity:.35" stroke-width="1.2"/></svg></div><div class="cur-ring" aria-hidden="true"></div><div id="sp" aria-hidden="true"></div>
 <nav class="dock" id="dock" aria-label="Page navigation">
   <div class="dk-nav"><a href="#about">About</a><a href="#gaming">Games</a><a href="#projects">Projects</a><a href="#music">Music</a><a href="#contact">Contact</a></div>
   <span class="dk-sep l"></span>
@@ -1961,12 +1963,13 @@ if(mqCalm.addEventListener)mqCalm.addEventListener("change",motion);else if(mqCa
 
   // custom cursor (mouse only)
   if(matchMedia("(hover:hover) and (pointer:fine)").matches&&!calm){
-    var dot=$(".cur-dot"),ring=$(".cur-ring"),x=-99,y=-99,rx=-99,ry=-99,on=false;
+    var dot=$(".cur-dot"),ship=dot.querySelector(".ship"),flame=dot.querySelector(".flame"),x=-99,y=-99,px=-99,py=-99,ang=-30,tx=-30,vs=0,idle=0,on=false;
+    function wrap(a){return((a+540)%360+360)%360-180}
     var LINK='a,button,[role="button"],[role="radio"],label,.chip,.game,.proj,.avatar,.pw-tb,.seg,summary';
     root.classList.add("cur-ok");
     addEventListener("pointermove",function(e){
       if(e.pointerType==="touch")return;
-      x=e.clientX;y=e.clientY;if(!on){on=true;rx=x;ry=y;root.classList.add("cur-on")}
+      x=e.clientX;y=e.clientY;if(!on){on=true;px=x;py=y;root.classList.add("cur-on")}
       dot.style.transform="translate3d("+x+"px,"+y+"px,0)";
       var t=e.target.closest?e.target:null;
       root.classList.toggle("cur-hide",!!(t&&t.closest("iframe,input,textarea,select")));
@@ -1979,7 +1982,13 @@ if(mqCalm.addEventListener)mqCalm.addEventListener("change",motion);else if(mqCa
       p.style.transform="translate("+e.clientX+"px,"+e.clientY+"px)";document.body.appendChild(p);setTimeout(function(){p.remove()},700);
     });
     addEventListener("pointerup",function(){root.classList.remove("cur-down")});
-    (function loop(){rx+=(x-rx)*.18;ry+=(y-ry)*.18;ring.style.transform="translate3d("+rx+"px,"+ry+"px,0)";requestAnimationFrame(loop)})();
+    (function loop(){
+      var dx=x-px,dy=y-py;px=x;py=y;vs+=(Math.hypot(dx,dy)-vs)*.2;
+      if(vs>1.6){tx=Math.atan2(dy,dx)*180/Math.PI+90;idle=0}else if(++idle>40){tx=-30}
+      ang=wrap(ang+wrap(tx-ang)*.16);
+      ship.style.transform="rotate("+ang.toFixed(1)+"deg)";
+      flame.style.transform="scaleY("+Math.min(1.7,.35+vs/12).toFixed(2)+")";
+      requestAnimationFrame(loop)})();
   }
 
   // scroll progress + dock scrollspy
